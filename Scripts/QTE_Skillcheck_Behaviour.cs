@@ -58,7 +58,6 @@ public class QTE_Skillcheck_Behaviour : MonoBehaviour
         // If the context of the QTE action is performed and onSkillcheck is TRUE
         if (context.performed && cursorBehaviour.onSkillcheck)
         {
-            // Call ChangeActiveSkillCheck()
             ChangeActiveSkillcheck();
         }
     }
@@ -73,12 +72,13 @@ public class QTE_Skillcheck_Behaviour : MonoBehaviour
         // Also, we are blocking the value from being itself or itself - 1 or itself + 1, why ?
         // It's avoiding to get skillcheck glue together.
         int randomNumber;
-        do
+        randomNumber = Random.Range(0, skillcheckArray.Length);
+        while (randomNumber == currentSkillcheck ||
+            randomNumber == currentSkillcheck - 1 ||
+            randomNumber == currentSkillcheck + 1)
         {
             randomNumber = Random.Range(0, skillcheckArray.Length);
-        } while (randomNumber == currentSkillcheck ||
-            randomNumber == currentSkillcheck - 1 ||
-            randomNumber == currentSkillcheck + 1);
+        }
 
         currentSkillcheck = randomNumber;
         // Find a skillcheck into the skillcheckArray having the value of currentSkillcheck as an index.
